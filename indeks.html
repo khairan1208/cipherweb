@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Cipher-nya M.Khairan Nazran</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <h2>Caesar Cipher</h2>
+
+  <textarea id="text" rows="4" cols="40" placeholder="Teks..."></textarea><br><br>
+  Shift: <input type="number" id="shift" value="3"><br><br>
+
+  <button onclick="encrypt()">Enkripsi</button>
+  <button onclick="decrypt()">Deskripsi</button>
+
+  <p>Hasil:</p>
+  <pre id="result"></pre>
+
+  <script>
+    function caesar(str, shift) {
+        shift = ((shift % 26) + 26) % 26;
+      return str.replace(/[a-z]/gi, c => {
+        const base = c === c.toUpperCase() ? 65 : 97;
+        return String.fromCharCode((c.charCodeAt(0) - base + shift + 26) % 26 + base);
+      });
+    }
+
+    function encrypt() {
+      const t = document.getElementById("text").value;
+      const s = parseInt(document.getElementById("shift").value);
+      document.getElementById("result").textContent = caesar(t, s);
+    }
+
+    function decrypt() {
+      const t = document.getElementById("text").value;
+      const s = parseInt(document.getElementById("shift").value);
+      document.getElementById("result").textContent = caesar(t, -s);
+    }
+  </script>
+</body>
+</html>
